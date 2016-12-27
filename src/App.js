@@ -2,6 +2,7 @@
  * Created by ttnd on 27/12/16.
  */
 import React from 'react'
+import {render} from 'react'
 
 export default class App extends React.Component {
   constructor() {
@@ -11,7 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        Working
+        Working fine
       </div>
     )
   }
