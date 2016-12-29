@@ -10,7 +10,7 @@ export default class CartTotal extends React.Component {
 
     let totalCart = this.props.data.reduce((total,row) => (total + (row.qty * row.price) ),0)
 
-    return(<div>Total = {totalCart}</div>)
+    return(<div>Cart Total is : {totalCart}</div>)
 
   }
 

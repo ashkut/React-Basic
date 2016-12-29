@@ -6,7 +6,16 @@ import React from 'react'
 
 export default class Items extends React.Component {
 
-  submit(){
+  addNewItem(){
+
+    console.log("called")
+
+    let item = this.refs.newItem.value
+
+    console.log("111 : " + this.refs.newItem.value)
+
+    this.props.addItem(item);
+
 
   }
 
@@ -19,9 +28,9 @@ export default class Items extends React.Component {
           <td>{row.name}</td>
           <td>{row.qty}</td>
           <td>{row.price}</td>
-          <td><button>-</button></td>
-          <td><button>+</button></td>
-          <td><button>Delete</button></td>
+          <td><button onClick={()=>this.props.delQty(row,index)}>-</button></td>
+          <td><button onClick={()=>this.props.addQty(row,index)}>+</button></td>
+          <td><button onClick={()=>this.props.delItem(index)}>Delete</button></td>
         </tr>
       )
     })
@@ -29,7 +38,9 @@ export default class Items extends React.Component {
     return(
       <tbody>
         <tr>
-          <input type="text" name="addItem" defaultValue="Enter Item"/><button onClick={this.props.addItem}>Add</button>
+          <td>
+
+          </td>
         </tr>
         {items}
       </tbody>
