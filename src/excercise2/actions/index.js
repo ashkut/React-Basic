@@ -6,8 +6,7 @@ import {
   ADD_ITEM,
   DEL_ITEM,
   ADD_QTY,
-  DEL_QTY,
-  UPDATE_CART_TOTAL
+  DEL_QTY
 } from '../constants'
 
 export function addItem(params) {

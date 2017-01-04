@@ -99,9 +99,9 @@ class Cart extends Component {
           </div>
           <span className="error">{this.state.error}</span>
           <table>
-            <Items data={this.props.items} addQty={this.addQty} delQty={this.delQty} delItem={this.delItem}/>
+            <Items data={this.props.cart.items} addQty={this.addQty} delQty={this.delQty} delItem={this.delItem}/>
           </table>
-          <CartTotal data={this.props.items}/>
+          <CartTotal data={this.props.cart.items}/>
         </center>
       </div>
 
