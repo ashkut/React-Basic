@@ -78,5 +78,25 @@ export function updateData(param) {
   }
 }
 
+export function createData(param) {
 
+  return (dispatch) => {
+    fetch("http://rest.learncode.academy/api/learncode/myData", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(param)
+    }).then((response) => {
+        console.log(response)
+        if(response.status === 200)
+          dispatch(fetchData())
+      }
+    ).catch((e) => {
+        console.log("Error while calling API....",e)
+      }
+    )
+  }
+}
 

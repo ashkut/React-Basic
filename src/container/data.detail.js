@@ -5,8 +5,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
+import {Table, PageHeader, Button} from 'react-bootstrap'
 
-import {updateData} from '../actions'
+import {
+  updateData,
+  createData
+} from '../actions'
 
 class DataDetail extends Component {
 
@@ -34,16 +38,19 @@ class DataDetail extends Component {
   }
 
   submitData(){
+
     let newData = {
       id: this.state.id,
       first_name: this.state.firstName,
       last_name: this.state.lastName,
       email: this.state.email,
       company: this.state.company
-
     }
 
-    this.props.dispatch(updateData(newData))
+    if(this.props.location.query.fromUpdate === "true")
+      this.props.dispatch(updateData(newData))
+    else
+      this.props.dispatch(createData(newData))
 
     browserHistory.push("/home")
 
@@ -53,13 +60,17 @@ class DataDetail extends Component {
     browserHistory.push("/home")
   }
 
-  componentDidMount(){
+  componentDidMount() {
 
     const idx = this.props.params.id
 
-    this.props.data.map((row, index) =>{
+    console.log(this.props.location.query.fromUpdate,"111")
 
-        if(row.id === idx){
+    if (this.props.location.query.fromUpdate === "true") {
+
+      this.props.data.map((row, index) => {
+
+        if (row.id === idx) {
           this.setState({
             id: idx,
             firstName: row.first_name,
@@ -68,7 +79,9 @@ class DataDetail extends Component {
             company: row.company
           })
         }
-    })
+      })
+    }
+
   }
 
   componentWillUnmount(){
@@ -85,36 +98,40 @@ class DataDetail extends Component {
 
     console.log("inside data.detail")
 
+    const tableStyle = {marginLeft: "80px", width: "40%"}
+    const headerStyle = {border:"1px solid #ddd",  marginLeft: "10px", backgroundColor:"ghostwhite"}
+    const fieldStyle = {width: "80%"}
+
     return(
       <div>
-        User Details below -
+        <PageHeader style={headerStyle}>
+          User Details Page
+        </PageHeader>
 
         <div>
-          <br/>
-          <table>
-            <tbody>
+          <Table striped bordered condensed hover responsive style={tableStyle} >
+            <tbody style={fieldStyle}>
               <tr>
-                <td>First Name</td>
-                <td><input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/></td>
+                <td style={{textAlign: "center"}}>First Name</td>
+                <td><input size="50" type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/></td>
               </tr>
               <tr>
-                <td>Last Name</td>
-                <td><input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange}/></td>
+                <td style={{textAlign: "center"}}>Last Name</td>
+                <td><input type="text" size="50" name="lastName" value={this.state.lastName} onChange={this.handleChange}/></td>
               </tr>
               <tr>
-                <td>Email </td>
-                <td><input type="text" name="email" value={this.state.email} onChange={this.handleChange}/></td>
+                <td style={{textAlign: "center"}}>Email Id </td>
+                <td><input type="text" size="50" name="email" value={this.state.email} onChange={this.handleChange}/></td>
               </tr>
               <tr>
-                <td>Company</td>
-                <td><input type="text" name="company" value={this.state.company} onChange={this.handleChange}/></td>
-              </tr>
-              <tr><td><br/></td></tr>
-              <tr>
-                <td><button onClick={this.submitData}>Click to Submit Changes</button></td> <td><button onClick={this.goHome}>Click for Home</button></td>
+                <td style={{textAlign: "center"}}>Company</td>
+                <td><input type="text" size="50" name="company" value={this.state.company} onChange={this.handleChange}/></td>
               </tr>
             </tbody>
-          </table>
+          </Table>
+
+          <Button bsStyle="primary" onClick={this.submitData} style={{marginLeft:"80px"}}>Save Changes</Button> <Button bsStyle="primary" onClick={this.goHome}>Home</Button>
+
         </div>
       </div>
     )
