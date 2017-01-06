@@ -11,8 +11,8 @@ import timerReducer from '../../excercise1/reducers'
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  timer: timerReducer,
-  routing: routerReducer
+  timer: timerReducer//,
+  //routing: routerReducer
 })
 
 export default rootReducer

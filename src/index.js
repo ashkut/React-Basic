@@ -17,9 +17,9 @@ let app = document.getElementById('main')
 
 const store = createMainStore
 
-const history = syncHistoryWithStore(browserHistory, store)
+//const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={store} >
-    <Router routes={Routes} history={history} />
+    <Router routes={Routes} history={browserHistory} />
   </Provider>, app)

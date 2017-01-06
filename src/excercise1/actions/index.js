@@ -43,3 +43,28 @@ export function changeExt(actionType, params) {
     params
   }
 }
+
+export function fetchData() {
+
+  return (dispatch) => {
+    fetch("http://rest.learncode.academy/api/learncode/myData")
+      .then((response) => {
+
+
+        return response.json()
+
+        }
+      )
+      .then(json => {
+        console.log(response.json())
+        dispatch(add)
+      })
+      .catch(
+      (e) => {
+        console.log("Error while calling API....")
+      }
+    )
+  }
+
+
+}
