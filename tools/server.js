@@ -10,7 +10,7 @@ import config from '../webpack.config'
 let app = express()
 let compile = webpack(config)
 
-app.use(require('webpack-dev-middleware')(compiler, {
+app.use(require('webpack-dev-middleware')(compile, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
